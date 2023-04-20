@@ -6,28 +6,21 @@ from google.oauth2 import service_account
 from google.cloud.speech_v1p1beta1 import types
 
 # Transcribe audio using Google Speech-to-Text API
-def transcribe_audio(audio_file_path):
+def transcribe_audio(gcs_uri):
     credentials = service_account.Credentials.from_service_account_file("/users/mv/googleconsole/elzee-go-987ecc4bba62.json")
     client = speech.SpeechClient(credentials=credentials)
-    gcs_uri = "gs://elzeego_meetings/joe.mp3"
 
-    with io.open(audio_file_path, "rb") as audio_file:
-        content = audio_file.read()
-
-    audio = speech.RecognitionAudio(content=content)
-    config = speech.RecognitionConfig(
-    encoding=speech.RecognitionConfig.AudioEncoding.MP3,
-    sample_rate_hertz=44100,  # Change this if your audio file has a different sample rate
-    language_code="en-US",
-)
     audio = speech.RecognitionAudio(uri=gcs_uri)
+    config = speech.RecognitionConfig(
+        encoding=speech.RecognitionConfig.AudioEncoding.MP3,  # Assuming the file is in MP3 format
+        sample_rate_hertz=16000,
+        language_code="en-US",
+    )
 
-    operation = client.long_running_recognize(config=config, audio=audio)
+    response = client.long_running_recognize(config=config, audio=audio)
 
     print("Waiting for operation to complete...")
-    response = operation.result(timeout=90)
-
-    response = client.recognize(config=config, audio=audio)
+    response = response.result(timeout=90)
 
     transcription = ""
     for result in response.results:
@@ -38,7 +31,7 @@ def transcribe_audio(audio_file_path):
 # Summarize text using ChatGPT-4 API
 
 def generate_summary(text):
-    openai_api_key = "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"
+    openai_api_key = "XXX"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {openai_api_key}"
