@@ -2,10 +2,10 @@
 from transcription import transcribe_audio, generate_summary, send_email_summary
 
 # Replace with the path to your audio file
-audio_file_path = "gs://your-bucket-name/path/to/your/audio-file.mp3"
+gcs_uri = "gs://elzeego_meetings/joe.mp3"
 
 # Transcribe and generate a summary
-transcription = transcribe_audio(audio_file_path)
+transcription = transcribe_audio(gcs_uri)
 print("Transcription:", transcription)
 summary = generate_summary(transcription)
 print("Summary:", summary)
@@ -17,7 +17,7 @@ if edited_summary.strip() != "":
     summary = edited_summary
 
 # Replace with the email addresses you want to send the summary to
-email_addresses = ["varna.mantas@gmail.com", "crow.commerce@gmail.com"]
+email_addresses = ["crow.commerce@gmail.com"]
 
 # Send the summary to the provided email addresses
 send_email_summary(email_addresses, summary)
