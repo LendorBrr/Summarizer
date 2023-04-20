@@ -17,7 +17,7 @@ if edited_summary.strip() != "":
     summary = edited_summary
 
 # Replace with the email addresses you want to send the summary to
-email_addresses = ["crow.commerce@gmail.com"]
+email_addresses = ["EMAIL@gmail.com"]
 
 # Send the summary to the provided email addresses
 send_email_summary(email_addresses, summary)
