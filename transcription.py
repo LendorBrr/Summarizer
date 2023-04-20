@@ -7,7 +7,7 @@ from google.cloud.speech_v1p1beta1 import types
 
 # Transcribe audio using Google Speech-to-Text API
 def transcribe_audio(gcs_uri):
-    credentials = service_account.Credentials.from_service_account_file("/users/mv/googleconsole/elzee-go-987ecc4bba62.json")
+    credentials = service_account.Credentials.from_service_account_file("/users/mv/googleconsole/.json")
     client = speech.SpeechClient(credentials=credentials)
 
     audio = speech.RecognitionAudio(uri=gcs_uri)
