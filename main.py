@@ -2,7 +2,7 @@
 from transcription import transcribe_audio, generate_summary, send_email_summary
 
 # Replace with the path to your audio file
-gcs_uri = "gs://elzeego_meetings/joe.mp3"
+gcs_uri = "gs://your_bucket/joe.mp3"
 
 # Transcribe and generate a summary
 transcription = transcribe_audio(gcs_uri)
